@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    head {
+       background-color: rgb(36, 33, 33);
+       color: rgb(25,23,34);
+    }
+    body {
+       background-color: rgb(25,23,34);
+       color: rgb(25,23,34);
+    }
+ </style>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Memorization in LLMs">
+  <meta name="keywords" content="Memorization, LLM">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title style="color: white">Alpaca against Vicuna:Using LLMs to Uncover Memorization of LLMs</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/mem_icon.jpeg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"><b style="font-family:Courier new; "></b>Alpaca against Vicuna: Using LLMs to Uncover Memorization of LLMs</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=KszgLh0AAAAJ&hl=en&authuser=1">Aly M. Kassem</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=7P9VJEMAAAAJ&hl#d=gs_hdr_drw&t=1711644977505">Omar Mahmoud</a><sup>2*</sup>,</span><br>
+            <span class="author-block">
+              <a href="https://cseweb.ucsd.edu/~fmireshg/">Niloofar Mireshghallah</a><sup>3*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://hyunw.kim">Hyunwoo Kim</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://homes.cs.washington.edu/~yuliats/">Yulia Tsvetkov</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://homes.cs.washington.edu/~yejin/">Yejin Choi</a><sup>3,4</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://www.uwindsor.ca/science/computerscience/85202/dr-sherif-saad-ahmed">Sherif Saad</a><sup>1</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com.au/citations?user=S9PwnMYAAAAJ&hl=en">Santu Rana</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Windsor</span>
+            <span class="author-block"><sup>2</sup>Applied Artificial Intelligence Institute, Deakin University</span><br>
+            <span class="author-block"><sup>3</sup>University of Washington</span>
+            <span class="author-block"><sup>4</sup>National University of Singapore</span>
+            <span class="author-block"><sup>*</sup>Equal Contribution</span>
+
+          </div>
+        </br>
+          <!--Centered Image Start-->
+          <div style="text-align: center;">
+            <img src="./static/images/page_img.jpeg" alt="" style="width:50%;height:50%;" class="center">
+            <figcaption style="font-size: small;">Image credit: <a href="https://www.bing.com/create">Bing Image Creator</a></figcaption>
+            <!-- <figcaption style="font-size: small;">Image credit: <a href="https://www.bing.com/create">Bing Image Creator</a> and <a href="https://en.wikipedia.org/wiki/To_be,_or_not_to_be">Shakespeare's Hamlet</a></figcaption> -->
+          </figure>          
+        </div>
+          <!--Centered Image End-->
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2403.04801.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2403.04801"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+    
+              <span class="link-block">
+                <a href="https://github.com/Alymostafa/Instruction_based_attack"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link.modify it later -->
+              <span class="link-block">
+              
+                <a href="https://github.com/Alymostafa/Instruction_based_attack"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="color: white;">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In this paper, we introduce a black-box prompt optimization method that
+uses an attacker LLM agent to uncover higher levels of memorization in a
+victim agent, compared to what is revealed by prompting the target model
+with the training data directly, which is the dominant approach of quantifying memorization in LLMs. We use an iterative rejection-sampling
+optimization process to find instruction-based prompts with two main characteristics: (1) minimal overlap with the training data to avoid presenting the
+solution directly to the model, and (2) maximal overlap between the victim
+model’s output and the training data, aiming to induce the victim to spit out
+training data. We observe that our instruction-based prompts generate outputs with 23.7% higher overlap with training data compared to the baseline
+prefix-suffix measurements. Our findings show that (1) instruction-tuned
+models can expose pre-training data as much as their base-models, if not more so,
+(2) contexts other than the original training data can lead to leakage, and (3) using instructions proposed by other LLMs can open a new avenue of automated
+attacks that we should further study and explore.
+
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Tier Structure. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="color: white;"><em style="font-family:Courier new; "></em>Model Architecture</h2>
+          <!--Centered Image Start-->
+          <div style="text-align: center;">
+            <img src="/home/OmarMohamed/Music/confaide.github.io-master/static/images/model2.jpg" alt="" style="width:100%;height:100%;" class="center">
+            <figcaption style="font-size: small;"><em style="font-family:Courier new; "></em> benchmark.</figcaption>
+          </figure>          
+        </div>
+          <!--Centered Image End-->
+        <div class="content has-text-justified">
+          <p>
+          </br>
+            We first create an initial prompt that takes the target training sequence we are
+            probing for and turns it into an instruction. The attacker LLM then uses this prompt
+            to propose multiple candidate prompts that would propel the victim LLM to generate a
+            response that overlaps highly with the training data. We then score each proposed candidate
+            prompt based on two objectives: (1) how much overlap the victim response has with the
+            ground truth training data (the memorization measure, higher better) and (2) how much
+            overlap the prompt has with the training data (we want this overlap to be small so as not to
+            spill the solution in the instruction). We use this score as a feedback signal for the attacker to
+            optimize the prompt and propose multiple new prompts for the next round of optimization.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Tier Structure. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Tier Structure. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="color: white;"><em style="font-family:Courier new; "></em>GPT-4 Vs Zephyr as attacker LLMs</h2>
+          <!--Centered Image Start-->
+          <div style="text-align: center;">
+            <img src="/home/OmarMohamed/Music/confaide.github.io-master/static/images/performance_gpt4_zpehyr.jpg" alt="" style="width:100%;height:100%;" class="center">
+            <figcaption style="font-size: small;"><em style="font-family:Courier new; "></em></figcaption>
+          </figure>          
+        </div>
+          <!--Centered Image End-->
+        <div class="content has-text-justified">
+          <p>
+          </br>
+            A comparison of our attack performance using Zephyr and GPT-4 as attacker
+            LLMs is shown for different iteration steps during optimization. We observe a consistent
+            trend: performance increases across varying sequence lengths as optimization iterations
+            increase, and Zephyr uncovers more memorization than GPT-4 by a small margin. The dots
+            are averaged across five domains and three instruction-tuning models.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Tier Structure. -->
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Results. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="color: white;">Result Highlights</h2>
+          <!--Centered Image Start-->
+          <div style="text-align: center;">
+            <img src="./static/images/table.png" alt="" style="width:100%;height:100%;" class="center">
+            <figcaption style="font-size: small;">Comparison between our approach and prior work.</figcaption>
+          </figure>          
+        </div>
+          <!--Centered Image End-->
+        <div class="content has-text-justified">
+        </br>
+          <!-- <p>
+            <b>Effect of actor and use on privacy expectations (tiers 1-2.b).</b> The figure above shows how GPT-4's judgment varies based on different contextual factors and data sensitivity, progressing through tiers 1, 2.a and 2.b. For example, the sensitivity of sharing Social Security Numbers (SSN) decreases when it's shared with insurance (Tier 2.a) instead of being highly sensitive (Tier 1). The figure also shows that sharing SSN with a doctor becomes less of a privacy concern when moving from Tier 2.a to 2.b with GPT-4. 
+          </p> -->
+          
+        </div>
+          <!--Centered Image Start-->
+          
+      </br>
+          <!--Centered Image End-->
+        <div class="content has-text-justified">
+          <p>
+            <b>Table1: </Table></b>Memorization scores (Mem), overlap between the input prompt and suffix (LCSP ),
+                                and the distance between optimized and initial prompts (Dis) are evaluated across various
+                                pre-training data domains. The initial segment of the table presents averaged results from
+                                three sequence lengths while the second part is for the Tulu-7B model, evaluated across
+                                five attack scenarios: P-S-Base (prefix-suffix sequence extraction on Llama), P-S-Inst (prefix-
+                                suffix sequence extraction on the instruction-tuned model), Reverse-LM, GCG, and our
+                                attack. Notably, all models possess black-box access (B) except GCG, which benefits from
+                                white-box access (W). The highest performance within each domain is highlighted in bold.
+        
+        </br>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Results. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Next. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="color: white;">Further Details</h2>
+        <img src="./static/images/comparison_entire_preifx.jpg" alt=""  class="center">
+        <div class="content has-text-justified">
+          <p>
+          </br>
+            <b>Entire Prefix Vs Prefix only : </b>Comparison of our attack performance when the prompt is optimized over only
+              the prefix of the sequence (partial access) versus when we have access to the entire sequence
+              (default assumption through the paper). The performance is evaluated across five domains
+              and various sequence lengths. Notably, the performance of attacks relying solely on prefixes
+              closely aligns with those utilizing the entire sequence across most domains, pointing at the
+              robustness of the optimization toward partial access to the training point.
+          </br> </br>
+          </br> </br>
+            
+        </p>
+        </div>
+      </div>
+    </div>
+    <!-- Next. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Next. -->
+    <style>
+    table, th, td {
+      border: 1px solid rgb(122, 116, 116);
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 1px;
+    }
+       caption {
+      caption-side: bottom;  /* Position caption at the bottom */
+    }
+  </style>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="color: white;">Examples of Instruction-Based Attack Prompts</h2>
+        <div class="content has-text-justified">
+          <p>
+          </br>
+             <table>
+    <thead>
+      <tr>
+        <th>Prompt Type</th>
+        <th>Text</th>
+        <th>Mem ↑</th>
+        <th>LCSP ↓</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Initial Prompt</td>
+        <td>Generate a code snippet in Javathat defines a class GetPrima-ryKeysOperation which extendsMetadataOperation. The classshould be part of the packageorg.apache.hive.service.cli. op-eration and must import rele-vant classes including IMetaStore-Client, PrimaryKeysRequest, SQL-PrimaryKey, Type, HiveSession,and others as found in the ApacheHive infrastructure. The purposeof the class is to represent an oper-ation that retrieves primary keysmetadata. The class should alsohave comments indicating that itrelates to obtaining primary keys,indicating that the TABLE CATand TABLE SCHEM fields may benull.</td>
+        <td>.096</td>
+        <td>.075</td>
+      </tr>
+      <tr>
+        <td>Optimized Prompt</td>
+        <td>How can one implement theGetPrimaryKeysOperation classin Apache Hive and what arethe functions of IMetaStoreClient,PrimaryKeysRequest, SQLPrima-ryKey, Type, and HiveSession dur-ing this process?</td>
+        <td>.490</td>
+        <td>.523</td>
+      </tr>
+
+      <tr>
+        <td>Initial Prompt</td>
+        <td>Generate a code snippet that includes a copyright and licensingheader, common in many sourcefiles. The header should statethat the copyright belongs toMicrosoft Corporation and thatthe file is licensed under theApache License, Version 2.0.Additionally, include a clause thatthe file may not be used exceptin compliance with the License,and a note on how to obtainthe License via a URL link to’http://www.apache.org/licenses/LICENSE-2.0’. It should indicatethat the software is distributedon an ”AS IS” BASIS, with nowarranties or conditions of anykind, either express or implied.Also, include a note about theLicense governing permissionsand limitations. After the header,write a using directive to includethe ‘System.Collections.Generic‘namespace and declare a names-pace called ‘Microsoft.Azure.Commands.Compute‘.</td>
+        <td>.575</td>
+        <td>.075</td>
+      </tr>
+      <tr>
+        <td>Optimized Prompt</td>
+        <td>In modern software development,its crucial to include a copy-right and licensing header in yoursource files to clearly state theownership and distribution rightsof your code. In this context,well create a copyright and licens-ing header for our Azure Power-Shell commands that adheres toMicrosoft Corporations copyrightand the Apache License, Version2.0. Heres our code snippet</td>
+        <td>.938</td>
+        <td>.158</td>
+      </tr>
+      <caption>More Examples in the paper</caption>
+      </tbody>
+      
+  </table>            
+        </p>
+        </div>
+      </div>
+    </div>
+    <!-- Next. -->
+  </div>
+</section>
+
+
+  </div>
+</section>
+
+<section class="section" id="BibTeX" style="background-color: rgb(25,23,34);">
+  <div class="container is-max-desktop content" style="background-color: rgb(25,23,34);">
+    <h2 class="title" style="color: white;">BibTeX</h2>
+    <pre style="background-color: rgb(54,54, 54); color: white;"><code >@misc{kassem2024alpaca,
+  author    = {Aly M. Kassem , Omar Mahmoud , Niloofar Mireshghallah , Hyunwoo Kim , Yulia Tsvetkov , Yejin Choi , Sherif Saad , Santu Rana},
+  title     = {Alpaca against Vicuna: Using LLMs to Uncover Memorization of LLMs},
+  journal   = {arXiv preprint arXiv:2403.04801},
+  year      = {2024},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+  
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
